@@ -12,7 +12,7 @@ import { defineConfig, devices } from '@playwright/test';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './tests',
+  testDir: 'sauceDemo/tests/ui',
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -27,9 +27,9 @@ export default defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   timeout: 20 * 1000, // 10 seconds per test
-   expect: {
-      timeout: 5000 // 5 seconds for expect assertions
-    },
+  expect: {
+    timeout: 5000 // 5 seconds for expect assertions
+  },
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://localhost:3000',
@@ -39,9 +39,10 @@ export default defineConfig({
     //   launchOptions :{
     //     slowMo:1000
     //  },
-    trace: 'on-first-retry',
-   
+    trace: 'retain-on-failure',
+    baseURL: 'https://www.saucedemo.com/'
   },
+  //globalSetup: require.resolve ('./sauceDemo/fixtures/setup.ts'),
   
 
   /* Configure projects for major browsers */
@@ -51,15 +52,15 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'] },
     },
 
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
+    // {
+    //   name: 'firefox',
+    //   use: { ...devices['Desktop Firefox'] },
+    // },
 
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
+    // {
+    //   name: 'webkit',
+    //   use: { ...devices['Desktop Safari'] },
+    // },
 
     /* Test against mobile viewports. */
     // {
