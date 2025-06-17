@@ -40,7 +40,8 @@ export default defineConfig({
     //     slowMo:1000
     //  },
     trace: 'retain-on-failure',
-    baseURL: 'https://www.saucedemo.com/'
+    baseURL: 'https://www.saucedemo.com/',
+    testIdAttribute: 'data-test'
   },
   //globalSetup: require.resolve ('./sauceDemo/fixtures/setup.ts'),
   
