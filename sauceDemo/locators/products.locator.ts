@@ -11,9 +11,5 @@ export const ProductLocators = {
     //sort button
     sortButtonLocator: 'product-sort-container',
 
-    //cart link button
-    shoppingCartLinkLocator: 'shopping-cart-link',
-
-    //menu button
-    menuButtonLocator: 'react-burger-menu-btn'           //id
+    
 }

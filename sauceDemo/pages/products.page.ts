@@ -1,5 +1,6 @@
 import {Page} from '@playwright/test'
 import {ProductLocators} from '../locators/products.locator'
+import {CommonLocator} from '../locators/common.locator'
 import {expect} from '../fixtures/setup'
 
 export class ProductPage {
@@ -22,6 +23,11 @@ export class ProductPage {
 
         const addToCartBtn = await this.getButtonLocatorByProductName(productName, 'ADD TO CART')
         await expect(addToCartBtn).toHaveText('ADD TO CART');
+    }
+
+    async clickCartButton(){
+        await this.page.getByTestId(CommonLocator.shoppingCartLinkLocator).click();
+        await expect(this.page).toHaveURL('/cart.html');
     }
 
     private async getButtonLocatorByProductName(productName: string, buttonName: string): Promise<any>{
