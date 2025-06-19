@@ -21,7 +21,7 @@ test.describe('yourCartPageTests negative tests', async () => {
         yc = new YourCartPage(page);
     })
 
-    test('error user last name test @negative @errorUserLastNameTest', async () => {
+    test('error user single product @negative ', async () => {
         await lp.login('error_user', 'secret_sauce');
         await pp.addDesiredProductToCart('Sauce Labs Backpack');
         await pp.clickCartButton();

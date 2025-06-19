@@ -8,5 +8,5 @@ export const yourCartLocators = {
 
     //navigation locators
     continueShopping: 'continue-shopping',
-    checkoutButton: 'continue-shopping'
+    checkoutButton: 'checkout'
 }

@@ -21,5 +21,9 @@ export class YourCartPage {
         // verify the state of the button is 'Remove' 
         await expect(cartItem.locator(yourCartLocators.itemRemoveButton)).toHaveText(removeButton);
     }
-        
+    
+    async clickCheckOutButton(){
+        await this.page.getByTestId(yourCartLocators.checkoutButton).click();
+        await expect(this.page).toHaveURL('/checkout-step-one.html');
+    };
     }
