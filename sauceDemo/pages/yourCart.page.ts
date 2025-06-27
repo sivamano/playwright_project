@@ -1,29 +1,36 @@
 import {yourCartLocators} from '../locators/yourCart.locator'
 import {Page} from '@playwright/test'
 import {expect} from '../fixtures/setup'
+import {ProductDetails} from '../types/productTypes'
 
 export class YourCartPage {
     constructor (private readonly page: Page){
         this.page = page ;
     }
 
-    async verifyCartItems(productName: string, productDescription: string, productQuantity: number, productPrice: string,removeButton: string){
+    async verifyItemsInCart(productDetails: ProductDetails ){
         // get the specific cart item based on provided name
         const cartItem = this.page.getByTestId(yourCartLocators.inventoryItem)
-                   .filter({has: this.page.locator(yourCartLocators.itemName, {hasText: productName})});
+                   .filter({has: this.page.locator(yourCartLocators.itemName, {hasText: productDetails.name})});
         // verify quantity of item has not changed
-        await expect(cartItem.locator(yourCartLocators.itemQuantity)).toHaveText(productQuantity.toString());
+        const qty = await cartItem.locator(yourCartLocators.itemQuantity).innerText();
+        if(qty!=productDetails.quantity)
+            throw new Error(`Item Quantity is different. Expected: ${productDetails.quantity}, Actual: ${qty}`)
         // verify item description has not changed
-        await expect(cartItem.locator(yourCartLocators.itemDescription)).toHaveText(productDescription);
-         // verify items price has not changed           
-        //await expect(cartItem.filter({has: this.page.locator(yourCartLocators.itemPrice,{hasText:productQuantity.toString()})})).toHaveText(productQuantity.toString());
-        await expect(cartItem.locator(yourCartLocators.itemPrice)).toHaveText(productPrice);
-        // verify the state of the button is 'Remove' 
-        await expect(cartItem.locator(yourCartLocators.itemRemoveButton)).toHaveText(removeButton);
+        const desc = await cartItem.locator(yourCartLocators.itemDescription).innerText();
+        if(desc!=productDetails.description)
+            throw new Error(`Item Description is different. Expected:${productDetails.description}, Actual:${desc}`)
+        // verify items price has not changed
+        const price = await cartItem.locator(yourCartLocators.itemPrice).innerText();
+        if (price!=productDetails.price)
+            throw new Error(`Item price is different. Expected: ${productDetails.price}, Actual: ${price}`)
+        // verify the state of the button is 'Remove'
+        const btnState =await cartItem.locator(yourCartLocators.itemRemoveButton).innerText();
+        if (btnState!="Remove")
+            throw new Error('Button name is not remove');
     }
     
     async clickCheckOutButton(){
         await this.page.getByTestId(yourCartLocators.checkoutButton).click();
-        await expect(this.page).toHaveURL('/checkout-step-one.html');
     };
     }

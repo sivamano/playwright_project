@@ -3,5 +3,8 @@ export const CommonLocator = {
     shoppingCartLinkLocator: 'shopping-cart-link',
 
     //menu button
-    menuButtonLocator: 'react-burger-menu-btn'           //id
+    menuButtonLocator: 'react-burger-menu-btn',           //id
+
+    //title
+    sectionHeading: 'title'
 }

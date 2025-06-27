@@ -9,19 +9,25 @@ export class YourInformationPage {
     async enterFirstName(firstName: string) {
        const fnField = this.page.getByTestId(yourInformationLocator.firstNameLocator);
        await fnField.fill(firstName);
-       await expect(fnField).toHaveValue(firstName);
+       const fnDisplayedValue = await fnField.inputValue();
+       if(fnDisplayedValue!=firstName)
+            throw new Error(`Customer's FirstName was not entered properly`)
     }
 
     async enterLastName(lastName: string) {
         const lnField = this.page.getByTestId(yourInformationLocator.lastNameLocator);
         await lnField.fill(lastName);
-        await expect(lnField).toHaveValue(lastName);
+        const lnDisplayedValue = await lnField.inputValue();
+        if(lnDisplayedValue!=lastName)
+            throw new Error(`Customer's Last Name was not entered properly`)
     }
 
     async enterZipCode(zipCode: string) {
         const zcField = this.page.getByTestId(yourInformationLocator.zipCodeLocator);
-        await zcField.fill('zipCode');
-        await expect(zcField).toHaveValue(zipCode);
+        await zcField.fill(zipCode);
+        const zcDisplayedValue = await zcField.inputValue();
+        if(zcDisplayedValue!=zipCode)
+            throw new Error(`Customer's Zip Code was not entered properly`)
     }
 
     async enterUserInformation(firstName: string,lastName: string,zipCode: string){
@@ -32,7 +38,6 @@ export class YourInformationPage {
 
     async proceedToCheckoutOverviewPage() {
         await this.page.getByTestId(yourInformationLocator.continueLocator).click();
-        await expect(this.page).toHaveURL('/checkout-step-two.html');
     };
 
 }

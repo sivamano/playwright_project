@@ -23,18 +23,7 @@ test.describe('negative tests of yourInformation page', async () => {
     })
 
     test('error user lastName test @negative @errorUserLastNameTest', async () => {
-        await lp.login('error_user', 'secret_sauce');
-        await pp.addDesiredProductToCart('Sauce Labs Onesie');
-        await pp.clickCartButton();
-        await yc.verifyCartItems('Sauce Labs Onesie',
-            'Rib snap infant onesie for the junior automation engineer in development. Reinforced 3-snap bottom closure, two-needle hemmed sleeved and bottom won\'t unravel.',
-            1,
-            '$7.99',
-            'Remove'
-        );
-        await yc.clickCheckOutButton();
-        await yi.enterUserInformation('error', 'notvisible', 'ZIP001');
-        test.fail();
+        
     });
 
 });

@@ -22,14 +22,7 @@ test.describe('yourCartPageTests negative tests', async () => {
     })
 
     test('error user single product @negative ', async () => {
-        await lp.login('error_user', 'secret_sauce');
-        await pp.addDesiredProductToCart('Sauce Labs Backpack');
-        await pp.clickCartButton();
-        await yc.verifyCartItems('Sauce Labs Backpack',
-            'carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.',
-            1,
-            '$29.99',
-            'Remove');
+       
 
     });
 

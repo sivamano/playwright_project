@@ -1,9 +1,9 @@
 export const CheckoutOverviewLocators ={
     cartItemLocator: 'inventory-item',
-    itemNameLocator: 'inventory_item_name',
-    itemQuantityLocator: 'cart_quantity',
-    itemDescLocator: 'inventory_item_desc',
-    itemPriceLocator: 'inventory_item_price',
+    itemNameLocator: '.inventory_item_name',
+    itemQuantityLocator: 'item-quantity',
+    itemDescLocator: 'inventory-item-desc',
+    itemPriceLocator: 'inventory-item-price',
 
     //payment information
     paymentInfoLabel: 'payment-info-label',
