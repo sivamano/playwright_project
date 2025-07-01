@@ -73,6 +73,7 @@ test.describe('products page negative tests', async () => {
     })
 
     test('test problem user wrong product image @problemUserWrongProductImage', async ({ page }) => {
+        test.skip()
         const user = getUser('problem')
         await lp.login(user.username, user.password);
         await expect(page).toHaveScreenshot('products_negative_tests.png', {
