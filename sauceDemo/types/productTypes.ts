@@ -3,4 +3,5 @@ export type ProductDetails = {
     description: string;
     quantity?: string;
     price: string;
+    productImageURL?: string;
 }

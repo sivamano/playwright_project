@@ -1,4 +1,4 @@
-export const ProductLocators = {
+export const productLocators = {
 
     //inventory and items
     inventoryItemLocator: 'inventory-item',
@@ -7,6 +7,8 @@ export const ProductLocators = {
     itemPriceLocator: 'inventory-item-price', 
     itemAddToCartBtnLocator: '.btn_small.btn_inventory', //class
     itemImageLocator: '.inventory_item_img',             //class
+    //generic image locator
+    genericImg: 'img',
 
     //sort button
     sortButtonLocator: 'product-sort-container',

@@ -1,9 +1,11 @@
-export const CommonLocator = {
-    //cart link button
+export const commonLocator = {
+    //cart locators
     shoppingCartLinkLocator: 'shopping-cart-link',
+    cartBadgeLocator: 'shopping-cart-badge',
 
     //menu button
-    menuButtonLocator: 'react-burger-menu-btn',           //id
+    menuButtonLocator: 'Open Menu',           //getbyrole
+    logoutLink: 'logout-sidebar-link',
 
     //title
     sectionHeading: 'title'

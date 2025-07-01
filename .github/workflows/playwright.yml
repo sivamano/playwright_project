@@ -6,6 +6,19 @@ on:
     branches: [ main, master ]
 jobs:
   test:
+    env:
+      STANDARD_USER: ${{ secrets.STANDARD_USER }}
+      STANDARD_PASSWORD: ${{ secrets.STANDARD_PASSWORD }}
+      LOCKEDOUT_USER: ${{ secrets.LOCKEDOUT_USER }}
+      LOCKEDOUT_PASSWORD: ${{ secrets.LOCKEDOUT_PASSWORD }}
+      PROBLEM_USER: ${{ secrets.PROBLEM_USER }}
+      PROBLEM_PASSWORD: ${{ secrets.PROBLEM_PASSWORD }}
+      PERFGLITCH_USER: ${{ secrets.PERFGLITCH_USER }}
+      PERFGLITCH_PASSWORD: ${{ secrets.PERFGLITCH_PASSWORD }}
+      ERROR_USER: ${{ secrets.ERROR_USER }}
+      ERROR_PASSWORD: ${{ secrets.ERROR_PASSWORD }}
+      VISUAL_USER: ${{ secrets.VISUAL_USER }}
+      VISUAL_PASSWORD: ${{ secrets.VISUAL_PASSWORD }}
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
@@ -13,6 +26,20 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
+    - name: Create .env from secrets
+      run:
+          echo "STANDARD_USER=$STANDARD_USER" >> .env
+          echo "STANDARD_PASSWORD=$STANDARD_PASSWORD" >> .env
+          echo "LOCKEDOUT_USER=$LOCKEDOUT_USER" >> .env
+          echo "LOCKEDOUT_PASSWORD=$LOCKEDOUT_PASSWORD" >> .env
+          echo "PROBLEM_USER=$PROBLEM_USER" >> .env
+          echo "PROBLEM_PASSWORD=$PROBLEM_PASSWORD" >> .env
+          echo "PERFGLITCH_USER=$PERFGLITCH_USER" >> .env
+          echo "PERFGLITCH_PASSWORD=$PERFGLITCH_PASSWORD" >> .env
+          echo "ERROR_USER=$ERROR_USER" >> .env
+          echo "ERROR_PASSWORD=$ERROR_PASSWORD" >> .env
+          echo "VISUAL_USER=$VISUAL_USER" >> .env
+          echo "VISUAL_PASSWORD=$VISUAL_PASSWORD" >> .env
     - name: Install dependencies
       run: npm ci
     - name: Install Playwright Browsers

@@ -21,7 +21,7 @@ type MyFixtures = {
 
 export const test = base.extend<MyFixtures>({
   browser: async ({}, use) => {
-    const browser = await chromium.launch({headless: false});
+    const browser = await chromium.launch({headless: true});
     await use(browser);
     await browser.close();
   },

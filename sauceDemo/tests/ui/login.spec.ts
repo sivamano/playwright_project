@@ -1,5 +1,8 @@
 import { test, expect } from '../../fixtures/setup';
 import { LoginPage } from '../../pages/login.page';
+import {getUser} from '../../utils/loadUsers'
+import {URI} from '../../utils/resources'
+import {LOGIN_MESSAGES} from '../../constants/login.constants'
 
 let lp: LoginPage
 test.describe('Login with available credentials', async () => {
@@ -18,38 +21,41 @@ test.describe('Login with available credentials', async () => {
     })
 
     test('@loginSimple simple standard user login', async ({ page }) => {
-        await lp.login('standard_user', 'secret_sauce');
-        await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
+        const user = getUser('standard')
+        await lp.login(user.username, user.password);
+        await expect(page).toHaveURL(URI.inventory);
     });
 
     test('@loginLockedOut simple lockedOut user login @negative @lockedOutUserTest', async ({ page }) => {
-        //lp = new LoginPage(page);
-        await lp.login('locked_out_user', 'secret_sauce');
+        const user = getUser('lockedOut')
+        await lp.login(user.username, user.password);
         const errorMsg = await lp.getErrorMessage();
-        expect(errorMsg).toEqual('Epic sadface: Sorry, this user has been locked out.');
+        expect(errorMsg).toEqual(LOGIN_MESSAGES.lockedOutError);
     });
 
     test('@login simple problem user login', async ({ page }) => {
-
-        await lp.login('problem_user', 'secret_sauce');
-        await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
+        const user = getUser('problem')
+        await lp.login(user.username, user.password);
+        await expect(page).toHaveURL(URI.inventory);
     })
 
     test('@loginPerfGlitch simple performance glitch user login', async ({ page }) => {
-        test.fail();
-        await lp.login('performance_glitch_user', 'secret_sauce');
-        await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
+        const user = getUser('perfGlitch')
+        await lp.login(user.username, user.password);
+        await expect(page).toHaveURL(URI.inventory);
 
     })
 
     test.skip('@login simple error user login', async ({ page }) => {
-        await lp.login('error_user', 'secret_sauce');
-        await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
+        const user = getUser('error')
+        await lp.login(user.username, user.password);
+        await expect(page).toHaveURL(URI.inventory);
     })
 
     test('@login simple visual user login', async ({ page }) => {
-        await lp.login('visual_user', 'secret_sauce');
-        await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
+        const user = getUser('visual')
+        await lp.login(user.username, user.password);
+        await expect(page).toHaveURL(URI.inventory);
     })
 
 
@@ -66,15 +72,17 @@ test.describe('Login Negative Test Cases', async () => {
     })
 
     test('incorrect userName @negative @wrongUserNameTest', async ({ page }) => {
-        await lp.login('wrongusername', 'secret_sauce');
+        const user = getUser('standard')
+        await lp.login('wrongusername', user.password);
         let errorMessage = await lp.getErrorMessage();
-        expect(errorMessage).toBe('Epic sadface: Username and password do not match any user in this service')
+        expect(errorMessage).toBe(LOGIN_MESSAGES.userNamePwdNoMatch)
     })
 
     test(' incorrect password @negative @wrongPasswordTest', async ({ page }) => {
-        await lp.login('standard_user', 'wrong_password');
+         const user = getUser('standard')
+        await lp.login(user.username, 'wrong_password');
         let errorMessage = await lp.getErrorMessage();
-        expect(errorMessage).toBe('Epic sadface: Username and password do not match any user in this service')
+        expect(errorMessage).toBe(LOGIN_MESSAGES.userNamePwdNoMatch)
     })
 
 

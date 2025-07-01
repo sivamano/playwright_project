@@ -1,4 +1,4 @@
-export const CheckoutOverviewLocators ={
+export const checkoutOverviewLocators ={
     cartItemLocator: 'inventory-item',
     itemNameLocator: '.inventory_item_name',
     itemQuantityLocator: 'item-quantity',

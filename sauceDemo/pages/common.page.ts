@@ -1,6 +1,6 @@
 import {Page} from '@playwright/test' 
 import {expect} from '../fixtures/setup'
-import {CommonLocator} from '../locators/common.locator'
+import {commonLocator} from '../locators/common.locator'
 import {yourCartLocators} from '../locators/yourCart.locator'
 
 export class CommonUtilityForPages {
@@ -23,13 +23,24 @@ export class CommonUtilityForPages {
     }
 
     async clickCartButton() {
-        await this.page.getByTestId(CommonLocator.shoppingCartLinkLocator).click();
+        await this.page.getByTestId(commonLocator.shoppingCartLinkLocator).click();
         await this.page.getByTestId(yourCartLocators.checkoutButton).waitFor({ state: 'visible' });
     }
-    
+
     async getPageSectionHeading(){
-        const sectionHeadingLocator = this.page.getByTestId(CommonLocator.sectionHeading);
+        const sectionHeadingLocator = this.page.getByTestId(commonLocator.sectionHeading);
         return sectionHeadingLocator;
     }
     
+    async getCartBadgeCount():Promise<number>{
+        const badgeText = await this.page.getByTestId(commonLocator.cartBadgeLocator).innerText();
+        const badgeCount = parseInt(badgeText,10);
+        console.log(badgeCount);
+        return badgeCount;
+    }
+
+    async logout(){
+        await this.page.getByRole('button',{name: commonLocator.menuButtonLocator}).click();
+        await this.page.getByTestId(commonLocator.logoutLink).click();
+    }
 }
